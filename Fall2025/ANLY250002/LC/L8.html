@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ANLY 2500 - Introduction to Business Analytics</title>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+
+  <link rel="stylesheet" href="../../../static/bootstrap5.2/bootstrap.min.css"/>
+  <link rel="stylesheet" href="../../../static/bootstrap-icons-1.91/bootstrap-icons.css"/>
+  <link rel="stylesheet" href="../../../static/fontawesome/css/all.css"/>
+  <link rel="stylesheet" href="../../../static/jquery-ui.min.css"/>
+  <link rel="stylesheet" href="../../../static/highlight/styles/atom-one-light.min.css"/>
+
+  <link rel="stylesheet" href="../../../static/site.css"/>
+  <link rel="icon" type="image/png" href="../../../static/img/logo.png"/>
+
+  <script src="../../../static/jquery-3.6.0.min.js"></script>
+  <script src="../../../static/bootstrap5.2/bootstrap.bundle.min.js"></script>
+  <script id="MathJax-script" async src="../../../static/MathJax/tex-mml-chtml.js"></script>
+  <!--    <script src="../../../static/fontawesome/all.min.js"></script>-->
+  <script src="../../../static/jquery-ui.min.js"></script>
+  <script src="../../../static/highlight/highlight.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.3/leaflet.min.css" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.3/leaflet.min.js"></script>
+
+  <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet"/>
+
+  <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+
+  <!-- sweetalert2 -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.10.7/sweetalert2.min.css" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.10.7/sweetalert2.all.min.js"></script>
+
+
+
+  <script src="../../../static/notebookjs/es5-shim.min.js"></script>
+  <script src="../../../static/notebookjs/marked.min.js"></script>
+  <script src="../../../static/notebookjs/purify.min.js"></script>
+  <script src="../../../static/notebookjs/ansi_up.min.js"></script>
+  <script src="../../../static/notebookjs/prism.min.js"></script>
+  <script src="../../../static/notebookjs/katex.min.js"></script>
+  <script src="../../../static/notebookjs/katex-auto-render.min.js"></script>
+  <script src="../../../static/notebookjs/notebook.min.js"></script>
+
+  <link rel="stylesheet" href="../../../static/notebookjs/katex.min.css" />
+  <link rel="stylesheet" href="../../../static/notebookjs/prism.css" />
+  <link rel="stylesheet" href="../../../static/notebookjs/notebook.css" />
+  <link rel="stylesheet" href="../../../static/notebookjs/nbpreview.css" />
+
+
+  <script src="../../../static/site.js"></script>
+
+  <script type="text/babel">
+    function Highlighter({content, language})
+    {
+      const highlighted = hljs.highlight(content, {language: language,}, false);
+
+      // console.log(highlighted.value);
+      return (
+              <pre className={`hljs`}>
+          <code dangerouslySetInnerHTML={{__html: highlighted.value}}/>
+        </pre>
+      );
+    }
+  </script>
+  <script>
+    async function showJupyterNotebook(url)
+    {
+      // fd
+      let fd = new FormData();
+      //fd.append("cid",cid);
+
+      // url
+      //let url = "0829/W1_1Python.ipynb";
+
+      // opts
+      let opts = {
+        method: "get",
+        cache: "no-store",
+      };
+
+      // fetch()
+      let r = await fetch( url, opts );
+      let rt = await r.text();
+      let id="jupyternotebookC";
+
+      let notebook = nb.parse(JSON.parse(rt));
+      let rendered = notebook.render();
+      document.querySelector( "#"+id ).appendChild(rendered);
+      // Prism.highlightAll();
+      hljs.highlightAll();
+
+    }
+
+    function initPro()
+    {
+      // hljs.highlightAll();
+      // let floatpanel = document.querySelector("#floatpanel");
+      // anime({
+      //     targets: floatpanel,
+      //     scale: {
+      //         value: 0.5,
+      //     }
+      //
+      // });
+      //fun_coursereflection();
+      showJupyterNotebook("code/L8_02.ipynb");
+    }
+
+
+    $(document).ready(initPro);
+  </script>
+</head>
+<body>
+<div class="container-md" id="jupyternotebookC"></div>
+
+
+</body>
+</html>
